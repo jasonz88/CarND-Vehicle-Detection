@@ -211,3 +211,19 @@ There are several challenges in the project:
 
 The current pipeline will still pick up some cars seen in the opposite traffic. Also it stops tracking the car when it goes beyond tree top on y axis; To make it more robust, I will need more negative tranining example for tree background, car front etc. Also the training should focus on smaller window sizes.
 
+---
+
+### 2nd Submission
+
+Thanks to a great reviewer. I've made the following changes inspired by the review comments:
+
+* instead of svc.predict, decision_function is used along with the threshold to better select only detection with high confidence; this actually removed the majority of the false positives if threshold set properly
+
+* limit the scan range to right half of the screen. as in this video the car is driving on the inner most lane so it is ok to make this assumption that all the car in the same traffic direction are found in the right half of the screen
+
+* tried opencv HOGDescriptor; since the compute() method of this descriptor requires 8 bit integer input which is the default format for jpg; I will need to figure out a way to use it in both the png training data and jpg test data; since I already used the HOG once + subsampling method to optimize the classifier performance and the time spent on HOG is not the majority; so I didn't spend too much time on this. It turns out avoiding unnecessary computation is the best way to accelerate the video pipeline.
+
+* use different window size based on the x coordinates. this is a great insight from the reviewer, that car size tend to become smaller when it approaches the center of the image. I adopted it and saved lots of computation, improved the detection accuracy without introducing any false positives. Now the solution uses [1.0 1.2 1.4] scale for 400 pixels on x axis with 200 pixels overlapping. this ensures smooth transition of window size
+
+* fixed the false negative issue in the video. Now the video has a very clean and stable output
+
