@@ -1,5 +1,9 @@
 # Vehicle Detection Project
 
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
+![alt text][image11]
+
 The goals / steps of this project are the following:
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
@@ -20,6 +24,7 @@ The goals / steps of this project are the following:
 [image8]: ./output_images/testOptimized.png
 [image9]: ./output_images/processed_video.gif
 [image10]: ./output_images/videopipeline.png
+[image11]: ./output_images/vehicle_detection.gif
 
 
 
